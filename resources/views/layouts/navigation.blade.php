@@ -21,6 +21,12 @@
                         <x-nav-link :href="route('users.list')" :active="request()->routeIs('users.list')">
                             {{ __('Users') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('roles.list')" :active="request()->routeIs('roles.list')">
+                            {{ __('Roles') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('permissions.list')" :active="request()->routeIs('permissions.list')">
+                            {{ __('Permissions') }}
+                        </x-nav-link>
                     </div>
                 @endrole
 

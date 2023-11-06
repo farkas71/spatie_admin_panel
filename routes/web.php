@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +41,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Route::put('/edit-process', [UserController::class, 'editProcess'])->name('admin.users.user.edit.process');
         // Route::get('/{id}/delete', [UserController::class, 'delete'])->name('admin.users.user.delete');
     });
+
+    Route::prefix('/roles')->middleware('role:superadmin|admin')->group(function () {
+        Route::get('/', [RoleController::class, 'list'])->name('roles.list');
+
+    });
+
+    Route::prefix('/permissions')->middleware('role:superadmin|admin')->group(function () {
+        Route::get('/', [PermissionController::class, 'list'])->name('permissions.list');
+    });
+
+
 });
 
 require __DIR__.'/auth.php';
