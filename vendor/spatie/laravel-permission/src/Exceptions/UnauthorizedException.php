@@ -13,7 +13,7 @@ class UnauthorizedException extends HttpException
 
     public static function forRoles(array $roles): self
     {
-        $message = 'User does not have the right roles.';
+        $message = 'nem rendelkezik megfelelő jogosultsággal.';
 
         if (config('permission.display_role_in_exception')) {
             $message .= ' Necessary roles are '.implode(', ', $roles);
