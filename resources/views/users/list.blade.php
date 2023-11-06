@@ -1,17 +1,47 @@
 <x-app-layout>
-    {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('User') }}
-        </h2>
-    </x-slot> --}}
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("Ez a user oldal") }}
-                </div>
-            </div>
-        </div>
+    @section('title', 'Felhasználók')
+
+    <p class="text-center my-5 h1">Felhasználók lista</p>
+    <div class="container mt-5 ">
+        <a class="btn btn-primary mb-1" href="#">Új felhasználó</a>
+        <table class="table table-striped table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>id</th>
+                    <th>Név</th>
+                    <th>Email </th>
+                    <th>Role</th>
+                    <th>Permission</th>
+                    <th class="text-center">műveletek</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($usersWithRoles as $user)
+                    <tr>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>
+                            @foreach ($user->roles as $role)
+                                <span class="badge bg-danger me-1">{{ $role->name }}</span>
+                            @endforeach
+                        </td>
+                        <td>????</td>
+
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <a class="btn btn-sm btn-outline-warning" href="#">szerkeszt</a>
+                                <form action="#" method="GET">
+                                    @csrf
+                                    <button class="btn btn-sm btn-outline-danger ms-1" type="submit">Törlés</button>
+                                </form>
+                            </div>
+                        </td>
+
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </x-app-layout>

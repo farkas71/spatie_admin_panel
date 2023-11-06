@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +30,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/users', function () {
-        return view('users.list');
-    })->middleware('role:superadmin|admin')->name('users');
 
+    Route::prefix('/users')->middleware('role:superadmin|admin')->group(function () {
+        Route::get('/', [UserController::class, 'list'])->name('users.list');
+        // Route::get('/{id}', [UserController::class, 'view'])->name('admin.users.user.view');
+        // Route::get('/{id}/edit', [UserController::class, 'edit'])->name('admin.users.user.edit');
+        // Route::put('/edit-process', [UserController::class, 'editProcess'])->name('admin.users.user.edit.process');
+        // Route::get('/{id}/delete', [UserController::class, 'delete'])->name('admin.users.user.delete');
+    });
 });
 
 require __DIR__.'/auth.php';
