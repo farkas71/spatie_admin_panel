@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-// use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Permission;
 
 
 class RoleController extends Controller
@@ -14,20 +14,22 @@ class RoleController extends Controller
         // minden elem lista
         $rolesWithPermissions = Role::with('permissions')->get();
         return view('roles.list', compact('rolesWithPermissions'));
-
     }
 
     public function create()
     {
         // új rekord felvitelhez ürlap megnyitás
-        return view('roles.create');
-
+        $permissions = Permission::all();
+        return view('roles.create', compact('permissions'));
     }
 
     public function createProces(Request $request)
     {
         // új rekord mentése adatbázisba
-        return redirect()->route('roles.list');
+        $role = Role::create(['name' => $request->role_name]);
+        $role->syncPermissions($request->permissions);
+
+        return redirect()->route('roles.list')->with('success', 'Szerepkör létrehozva.');
 
     }
 
@@ -40,21 +42,18 @@ class RoleController extends Controller
     {
         // adott rekord szerkesztéshez ürlap megnyitás
         return view('roles.edit');
-
     }
 
     public function editProces(Request $request, string $id)
     {
         // adott rekord szerkesztésének mentése adatbázisba
         return redirect()->route('roles.list');
-
     }
 
     public function destroy(string $id)
     {
         // adott rekord törlése
         return redirect()->route('roles.list');
-
     }
 
     public function trashPosts()
@@ -62,6 +61,5 @@ class RoleController extends Controller
         // törölt rekordok
         // $category = Category::onlyTrashed()->get();
         return view('roles.trash');
-
     }
 }

@@ -44,6 +44,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('/roles')->middleware('permission:admin_menu')->group(function () {
         Route::get('/', [RoleController::class, 'list'])->name('roles.list');
+        Route::get('/uj', [RoleController::class, 'create'])->name('roles.create');
+        Route::post('/uj', [RoleController::class, 'createProces'])->name('roles.add');
+
 
     });
 

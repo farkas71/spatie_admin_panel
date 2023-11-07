@@ -12,19 +12,19 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link class="link-underline-light" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
                 @can('admin_menu')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('users.list')" :active="request()->routeIs('users.list')">
+                        <x-nav-link class="link-underline-light" :href="route('users.list')" :active="request()->routeIs('users.list')">
                             {{ __('Users') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('roles.list')" :active="request()->routeIs('roles.list')">
+                        <x-nav-link class="link-underline-light" :href="route('roles.list')" :active="request()->routeIs('roles.list')">
                             {{ __('Roles') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('permissions.list')" :active="request()->routeIs('permissions.list')">
+                        <x-nav-link class="link-underline-light" :href="route('permissions.list')" :active="request()->routeIs('permissions.list')">
                             {{ __('Permissions') }}
                         </x-nav-link>
                     </div>

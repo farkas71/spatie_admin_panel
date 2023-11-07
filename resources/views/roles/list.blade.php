@@ -4,7 +4,7 @@
 
     <p class="text-center my-5 h1">Szerepkör lista</p>
     <div class="container mt-5 ">
-        <a class="btn btn-primary mb-1" href="#">Új szerepkör</a>
+        <a class="btn btn-primary mb-1" href="{{ route('roles.create') }}">Új szerepkör</a>
         <table class="table table-striped table-hover">
             <thead class="table-light">
                 <tr class="text-center">
