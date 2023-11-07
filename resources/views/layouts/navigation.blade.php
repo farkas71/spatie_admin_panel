@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                @role('superadmin|admin')
+                @can('admin_menu')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('users.list')" :active="request()->routeIs('users.list')">
                             {{ __('Users') }}
@@ -28,7 +28,7 @@
                             {{ __('Permissions') }}
                         </x-nav-link>
                     </div>
-                @endrole
+                @endcan
 
             </div>
 

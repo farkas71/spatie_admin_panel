@@ -34,7 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
 
-    Route::prefix('/users')->middleware('role:superadmin|admin')->group(function () {
+    Route::prefix('/users')->middleware('permission:admin_menu')->group(function () {
         Route::get('/', [UserController::class, 'list'])->name('users.list');
         // Route::get('/{id}', [UserController::class, 'view'])->name('admin.users.user.view');
         // Route::get('/{id}/edit', [UserController::class, 'edit'])->name('admin.users.user.edit');
@@ -42,12 +42,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Route::get('/{id}/delete', [UserController::class, 'delete'])->name('admin.users.user.delete');
     });
 
-    Route::prefix('/roles')->middleware('role:superadmin|admin')->group(function () {
+    Route::prefix('/roles')->middleware('permission:admin_menu')->group(function () {
         Route::get('/', [RoleController::class, 'list'])->name('roles.list');
 
     });
 
-    Route::prefix('/permissions')->middleware('role:superadmin|admin')->group(function () {
+    Route::prefix('/permissions')->middleware('permission:admin_menu')->group(function () {
         Route::get('/', [PermissionController::class, 'list'])->name('permissions.list');
     });
 
