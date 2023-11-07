@@ -38,7 +38,7 @@
                         @endcan
                         <td>
                             <div class="d-flex justify-content-center">
-                                <a class="btn btn-sm btn-outline-success" href="#">szerkeszt</a>
+                                <a class="btn btn-sm btn-outline-success" href="{{ route('roles.edit', ['roleName' => $role->name]) }}">szerkeszt</a>
                                 @can('delete users')
                                     <form action="#" method="GET">
                                         @csrf

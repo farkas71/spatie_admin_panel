@@ -46,6 +46,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [RoleController::class, 'list'])->name('roles.list');
         Route::get('/uj', [RoleController::class, 'create'])->name('roles.create');
         Route::post('/uj', [RoleController::class, 'createProces'])->name('roles.add');
+        Route::get('/szerkeszt/{roleName}', [RoleController::class, 'edit'])->name('roles.edit');
+        Route::post('/szerkeszt/{roleName}', [RoleController::class, 'editProces'])->name('roles.editProces');
+
 
 
     });

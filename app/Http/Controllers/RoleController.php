@@ -29,25 +29,34 @@ class RoleController extends Controller
         $role = Role::create(['name' => $request->role_name]);
         $role->syncPermissions($request->permissions);
 
-        return redirect()->route('roles.list')->with('success', 'Szerepkör létrehozva.');
+        return redirect()->route('roles.list')->with('success', 'Szerepkör létrehozva!');
 
     }
 
-    public function show(string $id)
-    {
-        // adott rekord megjelenitése
-    }
-
-    public function edit(string $id)
+    public function edit(string $roleName)
     {
         // adott rekord szerkesztéshez ürlap megnyitás
-        return view('roles.edit');
+        $role = Role::where('name', $roleName)->first();
+        $permissions = Permission::all();
+        $rolePermissions = $role->permissions->pluck('name')->all();
+
+        return view('roles.edit', compact('role', 'permissions', 'rolePermissions'));
     }
 
-    public function editProces(Request $request, string $id)
+    public function editProces(Request $request)
     {
-        // adott rekord szerkesztésének mentése adatbázisba
-        return redirect()->route('roles.list');
+        $role = Role::where('name', $request->role_name)->first();
+
+        if ($role) {
+            // név módosítás, ha a szerepkör létezik
+            $role->name = $request->role_name;
+            $role->save();
+
+            // permissionok szinkronizálása
+            $role->syncPermissions($request->permissions);
+        }
+
+        return redirect()->route('roles.list')->with('success', 'Szerepkör módosítva!');
     }
 
     public function destroy(string $id)
