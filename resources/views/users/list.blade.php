@@ -77,7 +77,7 @@
                     @endforeach
                 </tbody>
             </table>
-        @endrole
+        @endcan
 
 
     </div>

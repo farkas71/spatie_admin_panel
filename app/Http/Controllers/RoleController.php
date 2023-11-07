@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+// use Spatie\Permission\Models\Permission;
+
 
 class RoleController extends Controller
 {
     public function list()
     {
         // minden elem lista
-        return view('roles.list');
+        $rolesWithPermissions = Role::with('permissions')->get();
+        return view('roles.list', compact('rolesWithPermissions'));
 
     }
 
