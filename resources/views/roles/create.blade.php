@@ -10,7 +10,7 @@
                 <label for="role_name">Szerepkőr neve:</label>
                 <input type="text" class="form-control mb-2" name="role_name" id="role_name" required>
 
-                @can('delete roles')
+                @can('sync permissions')
                     <label>Engedélyek:</label><br>
                     <div class="form-control mb-2">
                         @foreach ($permissions as $permission)
@@ -26,7 +26,7 @@
                         </label>
                     </div>
                 @endcan
-                <a href="javascript:history.back()" class="btn btn-sm btn-warning mt-2">Vissza</a>
+                <a href="{{ route('roles.list') }}" class="btn btn-sm btn-warning mt-2">Vissza</a>
                 <input type="submit" name="mentes" value="MENTÉS" class="btn btn-sm btn-success mt-2">
             </form>
         </div>

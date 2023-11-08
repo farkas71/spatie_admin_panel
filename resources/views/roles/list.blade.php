@@ -2,6 +2,7 @@
 
     @section('title', 'Szerepkörök')
 
+
     <p class="text-center my-5 h1">Szerepkör lista</p>
     <div class="container mt-5 ">
         <a class="btn btn-primary mb-1" href="{{ route('roles.create') }}">Új szerepkör</a>
@@ -11,7 +12,7 @@
                     <th>id</th>
                     <th style="width: 150px;">Szerepkör neve</th>
                     <th style="width: 150px;">Guard név </th>
-                    @can('delete roles')
+                    @can('sync permissions')
                         <th></th>
                         <th>Engedélyek</th>
                     @else
@@ -32,7 +33,7 @@
                         <td class="text-center">
                             <span class="badge bg-danger">{{ $role->permissions->count() }}</span>
                         </td>
-                        @can('delete roles')
+                        @can('sync permissions')
                             <td>
                                 @foreach ($role->permissions as $permission)
                                     <span class="badge bg-danger me-1">{{ $permission->name }}</span>

@@ -4,7 +4,7 @@
 
     <p class="text-center my-5 h1">Felhasználók lista</p>
     <div class="container mt-5 ">
-        <a class="btn btn-primary mb-1" href="#">Új felhasználó</a>
+        <a class="btn btn-primary mb-1" href="{{ route('users.create') }}">Új felhasználó</a>
         <table class="table table-striped table-hover">
             <thead class="table-light">
                 <tr class="text-center">
@@ -12,7 +12,7 @@
                     <th style="width: 150px;">Felhasználó neve</th>
                     <th style="width: 250px;">Email cím</th>
                     <th style="width: 150px;">Szerepkör neve</th>
-                    @can('delete users')
+                    @can('sync permissions')
                         <th></th>
                         <th>Engedélyek</th>
                     @else
@@ -36,9 +36,20 @@
                             @endforeach
                         </td>
                         <td class="text-center">
-                            <span class="badge bg-danger">{{ $role->permissions->count() }}</span>
+                            @php
+                                $totalPermissions = 0;
+                            @endphp
+
+                            @foreach ($user->roles as $role)
+                                @php
+                                    $totalPermissions += $role->permissions->count(); // role-okhoz tartozó permission-ok összegzése
+                                @endphp
+                            @endforeach
+
+                            <span class="badge bg-danger">{{ $totalPermissions }}</span>
                         </td>
-                        @can('delete users')
+
+                        @can('sync permissions')
                             <td>
                                 @foreach ($user->roles as $role)
                                     @foreach ($role->permissions as $permission)

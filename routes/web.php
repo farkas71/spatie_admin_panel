@@ -19,7 +19,7 @@ use App\Http\Controllers\RoleController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -36,8 +36,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::prefix('/users')->middleware('permission:admin_menu')->group(function () {
-        Route::get('/', [UserController::class, 'list'])->name('users.list');
-
         Route::get('/', [UserController::class, 'list'])->middleware('permission:read users')->name('users.list');
         Route::get('/uj', [UserController::class, 'create'])->middleware('permission:create users')->name('users.create');
         Route::post('/uj', [UserController::class, 'createProces'])->middleware('permission:create users')->name('users.add');

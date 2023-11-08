@@ -44,15 +44,31 @@
             <main>
                 @if (session('success'))
                     <div class="container alert alert-success alert-dismissible fade show mt-3" role="alert">
-                        {{ session('success') }}
+                        {!! session('success') !!}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-                @if (session('errors'))
-                    <div class="container alert alert-danger alert-dismissible fade show mt-3" role="alert">
-                        {!! session('errors') !!}
+
+                @if (session('danger_message'))
+                    <div class="container alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                        {!! session('danger_message') !!}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                @endif
+
+                @if ($errors->any())
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>
+                                <div class="container alert alert-danger alert-dismissible fade show mt-2"
+                                    role="alert">
+                                    {{ $error }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
                 @endif
 
                 {{ $slot }}

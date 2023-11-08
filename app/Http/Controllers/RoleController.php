@@ -29,7 +29,6 @@ class RoleController extends Controller
         $role->syncPermissions($request->permissions);
 
         return redirect()->route('roles.list')->with('success', 'Szerepkör létrehozva!');
-
     }
 
 
@@ -47,13 +46,19 @@ class RoleController extends Controller
     {
         $role = Role::where('name', $roleName)->first();
 
+        if ($role->name === 'superadmin') {
+            return redirect()->route('roles.list')->with('danger_message', 'A <strong>superadmin</strong> szerepkör nem módosítható!');
+            exit;
+        }
+
         if ($role) {
             // név módosítás, ha a szerepkör létezik
             $role->name = $request->role_name;
+
             $role->save();
 
-            // permissionok szinkronizálása ha felhasználónak van engeélye
-            if (auth()->user()->can('delete roles')) {
+            // permissionok szinkronizálása ha felhasználónak van engedélye
+            if (auth()->user()->can('sync permissions')) {
                 $role->syncPermissions($request->permissions);
             }
         }
@@ -67,7 +72,8 @@ class RoleController extends Controller
         $role = Role::where('name', $roleName)->first();
 
         if ($role->name === 'superadmin') {
-            return redirect()->route('roles.list')->with('errors', 'A <strong>superadmin</strong> szerepkör nem törölhető!');
+            return redirect()->route('roles.list')->with('danger_message', 'A <strong>superadmin</strong> szerepkör nem törölhető!');
+            exit;
         }
 
         $role->delete();
@@ -75,11 +81,4 @@ class RoleController extends Controller
         return redirect()->route('roles.list')->with('success', 'Szerepkör törölve!');
     }
 
-
-    public function trashPosts()
-    {
-        // törölt rekordok
-        // $category = Category::onlyTrashed()->get();
-        return view('roles.trash');
-    }
 }

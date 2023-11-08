@@ -3,11 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 
 class RoleAndPermissionSeeder extends Seeder
@@ -24,12 +21,14 @@ class RoleAndPermissionSeeder extends Seeder
         $userPermission4 = Permission::create(['name' => 'delete users']);
 
         // ROLE MODEL
+        $rolePermission0 = Permission::create(['name' => 'sync roles']);
         $rolePermission1 = Permission::create(['name' => 'create roles']);
         $rolePermission2 = Permission::create(['name' => 'read roles']);
         $rolePermission3 = Permission::create(['name' => 'update roles']);
         $rolePermission4 = Permission::create(['name' => 'delete roles']);
 
         // PERMISSION MODEL
+        $permission0 = Permission::create(['name' => 'sync permissions']);
         // $permission1 = Permission::create(['name' => 'create permissions']);
         // $permission2 = Permission::create(['name' => 'read permissions']);
         // $permission3 = Permission::create(['name' => 'update permissions']);
