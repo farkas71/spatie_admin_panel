@@ -32,17 +32,5 @@
         </div>
     </div>
 
-    <script>
-        var selectAllCheckbox = document.getElementById('selectAllPermissions');
-        var permissionCheckboxes = document.querySelectorAll('input[name="permissions[]"]');
-
-        selectAllCheckbox.addEventListener('change', function() {
-            permissionCheckboxes.forEach(function(checkbox) {
-                checkbox.checked = selectAllCheckbox.checked;
-            });
-        });
-    </script>
-
-
-
+    <script src="{{ asset('js/role.js') }}"></script>
 </x-app-layout>

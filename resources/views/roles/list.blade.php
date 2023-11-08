@@ -85,22 +85,5 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            $('#staticBackdrop').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget);
-                var roleName = button.data('role-name');
-                var modal = $(this);
-
-                // Az adatok beillesztése modal részekbe
-                modal.find('.modal-title').text(roleName);
-                modal.find('.modal-text').text('Biztosan törölöd ezt a szerepkört?');
-
-                // Törlés gombra kattintáskos művelet
-                modal.find('.delete-button').on('click', function() {
-                    window.location.href = "roles/torol/" + roleName;
-                });
-            });
-        });
-    </script>
+    <script src="{{ asset('js/role.js') }}"></script>
 </x-app-layout>

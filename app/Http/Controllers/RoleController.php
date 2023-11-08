@@ -26,7 +26,9 @@ class RoleController extends Controller
     public function createProces(Request $request)
     {
         $role = Role::create(['name' => $request->role_name]);
-        $role->syncPermissions($request->permissions);
+        if (auth()->user()->can('sync permissions')) {
+            $role->syncPermissions($request->permissions);
+        }
 
         return redirect()->route('roles.list')->with('success', 'Szerepkör létrehozva!');
     }
@@ -54,7 +56,6 @@ class RoleController extends Controller
         if ($role) {
             // név módosítás, ha a szerepkör létezik
             $role->name = $request->role_name;
-
             $role->save();
 
             // permissionok szinkronizálása ha felhasználónak van engedélye

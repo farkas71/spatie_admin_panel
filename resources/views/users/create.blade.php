@@ -38,14 +38,5 @@
         </div>
     </div>
 
-    <script>
-        var selectAllCheckbox = document.getElementById('selectAllRoles');
-        var roleCheckboxes = document.querySelectorAll('input[name="roles[]"]');
-
-        selectAllCheckbox.addEventListener('change', function() {
-            roleCheckboxes.forEach(function(checkbox) {
-                checkbox.checked = selectAllCheckbox.checked;
-            });
-        });
-    </script>
+    <script src="{{ asset('js/user.js') }}"></script>
 </x-app-layout>

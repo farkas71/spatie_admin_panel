@@ -10,10 +10,12 @@
                 <input type="hidden" name="id" value="{{ $user->id }}">
 
                 <label for="name">Név:</label>
-                <input type="text" class="form-control mb-2" name="name" id="name" value="{{ $user->name }}" required>
+                <input type="text" class="form-control mb-2" name="name" id="name" value="{{ $user->name }}"
+                    required>
 
                 <label for="email">Email:</label>
-                <input type="email" class="form-control mb-2" name="email" id="email" value="{{ $user->email }}"required>
+                <input type="email" class="form-control mb-2" name="email" id="email"
+                    value="{{ $user->email }}"required>
 
                 <label for="password">Jelszó:</label>
                 <input type="password" class="form-control mb-2" name="password" id="password">
@@ -24,8 +26,7 @@
                         @foreach ($roles as $role)
                             <span class="badge text-bg-danger m-1">
                                 <input type="checkbox" name="roles[]" value="{{ $role->name }}" id="{{ $role->id }}"
-                                    class="form-check-input"
-                                    {{ in_array($role->name, $userRoles) ? 'checked' : '' }}>
+                                    class="form-check-input" {{ in_array($role->name, $userRoles) ? 'checked' : '' }}>
                                 <label for="{{ $role->id }}" class="form-check-label">{{ $role->name }}</label>
                             </span>
                         @endforeach
@@ -42,14 +43,5 @@
         </div>
     </div>
 
-    <script>
-        var selectAllCheckbox = document.getElementById('selectAllRoles');
-        var roleCheckboxes = document.querySelectorAll('input[name="roles[]"]');
-
-        selectAllCheckbox.addEventListener('change', function() {
-            roleCheckboxes.forEach(function(checkbox) {
-                checkbox.checked = selectAllCheckbox.checked;
-            });
-        });
-    </script>
+    <script src="{{ asset('js/user.js') }}"></script>
 </x-app-layout>

@@ -53,7 +53,9 @@ class UserController extends Controller
 
         ]);
 
-        $user->assignRole($request->roles);
+        if (auth()->user()->can('sync roles')) {
+            $user->syncRoles($request->roles);
+        }
 
         return redirect()->route('users.list')->with('success', 'Felhasználó létrehozva!');
     }
