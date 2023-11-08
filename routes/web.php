@@ -43,11 +43,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::prefix('/roles')->middleware('permission:admin_menu')->group(function () {
-        Route::get('/', [RoleController::class, 'list'])->name('roles.list');
-        Route::get('/uj', [RoleController::class, 'create'])->name('roles.create');
-        Route::post('/uj', [RoleController::class, 'createProces'])->name('roles.add');
-        Route::get('/szerkeszt/{roleName}', [RoleController::class, 'edit'])->name('roles.edit');
-        Route::post('/szerkeszt/{roleName}', [RoleController::class, 'editProces'])->name('roles.editProces');
+        Route::get('/', [RoleController::class, 'list'])->middleware('permission:read roles')->name('roles.list');
+        Route::get('/uj', [RoleController::class, 'create'])->middleware('permission:create roles')->name('roles.create');
+        Route::post('/uj', [RoleController::class, 'createProces'])->middleware('permission:create roles')->name('roles.add');
+        Route::get('/szerkeszt/{roleName}', [RoleController::class, 'edit'])->middleware('permission:update roles')->name('roles.edit');
+        Route::post('/szerkeszt/{roleName}', [RoleController::class, 'editProces'])->middleware('permission:update roles')->name('roles.editProces');
 
 
 
