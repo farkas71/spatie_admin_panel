@@ -11,13 +11,15 @@
                     <th>id</th>
                     <th style="width: 150px;">Szerepkör neve</th>
                     <th style="width: 150px;">Guard név </th>
-                    @can('delete users')
+                    @can('delete roles')
                         <th></th>
                         <th>Engedélyek</th>
                     @else
                         <th>Engedélyek száma</th>
                     @endcan
-                    <th>Műveletek</th>
+                    @if (auth()->user()->can('delete roles') || auth()->user()->can('update roles'))
+                        <th>Műveletek</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -36,17 +38,24 @@
                                 @endforeach
                             </td>
                         @endcan
-                        <td>
-                            <div class="d-flex justify-content-center">
-                                <a class="btn btn-sm btn-outline-success" href="{{ route('roles.edit', ['roleName' => $role->name]) }}">szerkeszt</a>
-                                @can('delete roles')
-                                    <form action="#" method="GET">
-                                        @csrf
-                                        <button class="btn btn-sm btn-outline-danger ms-1" type="submit">Törlés</button>
-                                    </form>
-                                @endcan
-                            </div>
-                        </td>
+                        @if (auth()->user()->can('delete roles') || auth()->user()->can('update roles'))
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    @can('update roles')
+                                        <a class="btn btn-sm btn-outline-success"
+                                            href="{{ route('roles.edit', ['roleName' => $role->name]) }}">szerkeszt</a>
+                                    @endcan
+
+                                    @can('delete roles')
+                                        <form action="#" method="GET">
+                                            @csrf
+                                            <button class="btn btn-sm btn-outline-danger ms-1"
+                                                type="submit">Törlés</button>
+                                        </form>
+                                    @endcan
+                                </div>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>

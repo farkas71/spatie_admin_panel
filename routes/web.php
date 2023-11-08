@@ -48,7 +48,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/uj', [RoleController::class, 'createProces'])->middleware('permission:create roles')->name('roles.add');
         Route::get('/szerkeszt/{roleName}', [RoleController::class, 'edit'])->middleware('permission:update roles')->name('roles.edit');
         Route::post('/szerkeszt/{roleName}', [RoleController::class, 'editProces'])->middleware('permission:update roles')->name('roles.editProces');
-
+        Route::get('/torol/{roleName}', [RoleController::class, 'delete'])->middleware('permission:delete roles')->name('roles.delete');
 
 
     });

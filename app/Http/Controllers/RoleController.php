@@ -62,13 +62,13 @@ class RoleController extends Controller
     }
 
 
-    public function destroy(string $id)
+    public function delete(string $roleName)
     {
         // adott rekord törlése
         return redirect()->route('roles.list');
     }
 
-    
+
     public function trashPosts()
     {
         // törölt rekordok
