@@ -43,9 +43,9 @@ class RoleController extends Controller
         return view('roles.edit', compact('role', 'permissions', 'rolePermissions'));
     }
 
-    public function editProces(Request $request)
+    public function editProces(Request $request, string $roleName)
     {
-        $role = Role::where('name', $request->role_name)->first();
+        $role = Role::where('name', $roleName)->first();
 
         if ($role) {
             // név módosítás, ha a szerepkör létezik

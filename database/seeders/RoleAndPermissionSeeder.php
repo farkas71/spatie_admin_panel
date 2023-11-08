@@ -50,18 +50,20 @@ class RoleAndPermissionSeeder extends Seeder
                 $userPermission2,
                 $userPermission3,
 
+                $rolePermission1,
                 $rolePermission2,
-                
+                $rolePermission3,
+
                 $permission2,
-                
+
                 $otherPermission1,
                 $otherPermission2,
             ]);
 
 
         Role::create(['name' => 'user'])
-        ->syncPermissions([
-            // $otherPermission1,
-        ]);
+            ->syncPermissions([
+                // $otherPermission1,
+            ]);
     }
 }
