@@ -4,7 +4,6 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\PermissionController;
 
 
 /*
@@ -25,21 +24,26 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
+    Route::prefix('/')->group(function () {
+        Route::get('profile', [ProfileController::class, 'edit'])->middleware('permission:admin_profil')->name('profile.edit');
+        Route::patch('profile', [ProfileController::class, 'update'])->middleware('permission:admin_profil')->name('profile.update');
+        Route::delete('profile', [ProfileController::class, 'destroy'])->middleware('permission:admin_profil')->name('profile.destroy');
+    });
+
 
     Route::prefix('/users')->middleware('permission:admin_menu')->group(function () {
         Route::get('/', [UserController::class, 'list'])->name('users.list');
-        // Route::get('/{id}', [UserController::class, 'view'])->name('admin.users.user.view');
-        // Route::get('/{id}/edit', [UserController::class, 'edit'])->name('admin.users.user.edit');
-        // Route::put('/edit-process', [UserController::class, 'editProcess'])->name('admin.users.user.edit.process');
-        // Route::get('/{id}/delete', [UserController::class, 'delete'])->name('admin.users.user.delete');
+
+        Route::get('/', [UserController::class, 'list'])->middleware('permission:read users')->name('users.list');
+        Route::get('/uj', [UserController::class, 'create'])->middleware('permission:create users')->name('users.create');
+        Route::post('/uj', [UserController::class, 'createProces'])->middleware('permission:create users')->name('users.add');
+        Route::get('/szerkeszt/{userName}', [UserController::class, 'edit'])->middleware('permission:update users')->name('users.edit');
+        Route::post('/szerkeszt/{userName}', [UserController::class, 'editProces'])->middleware('permission:update users')->name('users.editProces');
+        Route::get('/torol/{userName}', [UserController::class, 'delete'])->middleware('permission:delete users')->name('users.delete');
     });
 
     Route::prefix('/roles')->middleware('permission:admin_menu')->group(function () {
@@ -49,15 +53,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/szerkeszt/{roleName}', [RoleController::class, 'edit'])->middleware('permission:update roles')->name('roles.edit');
         Route::post('/szerkeszt/{roleName}', [RoleController::class, 'editProces'])->middleware('permission:update roles')->name('roles.editProces');
         Route::get('/torol/{roleName}', [RoleController::class, 'delete'])->middleware('permission:delete roles')->name('roles.delete');
-
-
     });
 
-    Route::prefix('/permissions')->middleware('permission:admin_menu')->group(function () {
-        Route::get('/', [PermissionController::class, 'list'])->name('permissions.list');
-    });
+    // Route::prefix('/permissions')->middleware('permission:admin_menu')->group(function () {
+    // });
 
 
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

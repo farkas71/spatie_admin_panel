@@ -30,14 +30,15 @@ class RoleAndPermissionSeeder extends Seeder
         $rolePermission4 = Permission::create(['name' => 'delete roles']);
 
         // PERMISSION MODEL
-        $permission1 = Permission::create(['name' => 'create permissions']);
-        $permission2 = Permission::create(['name' => 'read permissions']);
-        $permission3 = Permission::create(['name' => 'update permissions']);
-        $permission4 = Permission::create(['name' => 'delete permissions']);
+        // $permission1 = Permission::create(['name' => 'create permissions']);
+        // $permission2 = Permission::create(['name' => 'read permissions']);
+        // $permission3 = Permission::create(['name' => 'update permissions']);
+        // $permission4 = Permission::create(['name' => 'delete permissions']);
 
         // OTHER MODEL
         $otherPermission1 = Permission::create(['name' => 'admin_menu']);
-        $otherPermission2 = Permission::create(['name' => 'admin_dashboard']);
+        $otherPermission2 = Permission::create(['name' => 'admin_profil']);
+        $otherPermission3 = Permission::create(['name' => 'admin_dashboard']);
 
 
         Role::create(['name' => 'superadmin'])
@@ -54,10 +55,10 @@ class RoleAndPermissionSeeder extends Seeder
                 $rolePermission2,
                 $rolePermission3,
 
-                $permission2,
+                // $permission2,
 
                 $otherPermission1,
-                $otherPermission2,
+                $otherPermission3,
             ]);
 
 

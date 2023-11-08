@@ -49,14 +49,11 @@
                                     @endcan
 
                                     @can('delete roles')
-                                        <form action="#" method="GET">
-                                            @csrf
-                                            <button type="button" class="btn btn-sm btn-outline-danger ms-1"
-                                                id="deleteButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                                data-role-name="{{ $role->name }}">
-                                                Törlés
-                                            </button>
-                                        </form>
+                                        <button type="button" class="btn btn-sm btn-outline-danger ms-1" id="deleteButton"
+                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                            data-role-name="{{ $role->name }}">
+                                            Törlés
+                                        </button>
                                     @endcan
                                 </div>
                             </td>
@@ -103,7 +100,6 @@
                     window.location.href = "roles/torol/" + roleName;
                 });
             });
-
         });
     </script>
 </x-app-layout>

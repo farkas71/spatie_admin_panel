@@ -3,6 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
+
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
@@ -16,6 +17,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
                 @can('admin_menu')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link class="link-underline-light" :href="route('users.list')" :active="request()->routeIs('users.list')">
@@ -24,9 +26,9 @@
                         <x-nav-link class="link-underline-light" :href="route('roles.list')" :active="request()->routeIs('roles.list')">
                             {{ __('Roles') }}
                         </x-nav-link>
-                        <x-nav-link class="link-underline-light" :href="route('permissions.list')" :active="request()->routeIs('permissions.list')">
+                        {{-- <x-nav-link class="link-underline-light" :href="route('permissions.list')" :active="request()->routeIs('permissions.list')">
                             {{ __('Permissions') }}
-                        </x-nav-link>
+                        </x-nav-link> --}}
                     </div>
                 @endcan
 
@@ -52,9 +54,11 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+                        @can('admin_profil')
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                        @endcan
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -102,9 +106,11 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
+                @can('admin_profil')
+                    <x-responsive-nav-link :href="route('profile.edit')">
+                        {{ __('Profile') }}
+                    </x-responsive-nav-link>
+                @endcan
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
