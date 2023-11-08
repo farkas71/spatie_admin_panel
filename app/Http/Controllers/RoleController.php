@@ -64,8 +64,15 @@ class RoleController extends Controller
 
     public function delete(string $roleName)
     {
-        // adott rekord törlése
-        return redirect()->route('roles.list');
+        $role = Role::where('name', $roleName)->first();
+
+        if ($role->name === 'superadmin') {
+            return redirect()->route('roles.list')->with('errors', 'A <strong>superadmin</strong> szerepkör nem törölhető!');
+        }
+
+        $role->delete();
+
+        return redirect()->route('roles.list')->with('success', 'Szerepkör törölve!');
     }
 
 

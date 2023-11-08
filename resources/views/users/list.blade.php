@@ -37,7 +37,7 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center">
-                                    <a class="btn btn-sm btn-outline-success" href="#">szerkeszt</a>
+                                    <a class="btn btn-sm btn-outline-primary" href="#">szerkeszt</a>
                                     <form action="#" method="GET">
                                         @csrf
                                         <button class="btn btn-sm btn-outline-danger ms-1" type="submit">Törlés</button>
