@@ -8,19 +8,18 @@
         <a class="btn btn-primary mb-1" href="{{ route('roles.create') }}">Új szerepkör</a>
         <table class="table table-striped table-hover">
             <thead class="table-light">
-                <tr class="text-center">
+                <tr>
                     <th>id</th>
                     <th style="width: 150px;">Szerepkör neve</th>
                     <th style="width: 150px;">Guard név </th>
                     @can('sync permissions')
-                        <th></th>
-                        <th>Engedélyek</th>
+                        <th colspan="2">Engedélyek</th>
                     @else
                         <th>Engedélyek száma</th>
                     @endcan
                     @if (auth()->user()->can('delete roles') ||
                             auth()->user()->can('update roles'))
-                        <th>Műveletek</th>
+                        <th class="text-center">Műveletek</th>
                     @endif
                 </tr>
             </thead>
@@ -28,9 +27,9 @@
                 @foreach ($rolesWithPermissions as $role)
                     <tr>
                         <td class="text-center">{{ $role->id }}</td>
-                        <td class="ps-4"><b>{{ $role->name }}</b></td>
-                        <td class="text-center">{{ $role->guard_name }}</td>
-                        <td class="text-center">
+                        <td><b>{{ $role->name }}</b></td>
+                        <td>{{ $role->guard_name }}</td>
+                        <td>
                             <span class="badge bg-danger">{{ $role->permissions->count() }}</span>
                         </td>
                         @can('sync permissions')

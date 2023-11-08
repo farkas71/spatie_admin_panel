@@ -7,20 +7,19 @@
         <a class="btn btn-primary mb-1" href="{{ route('users.create') }}">Új felhasználó</a>
         <table class="table table-striped table-hover">
             <thead class="table-light">
-                <tr class="text-center">
+                <tr>
                     <th>id</th>
                     <th style="width: 150px;">Felhasználó neve</th>
                     <th style="width: 250px;">Email cím</th>
                     <th style="width: 150px;">Szerepkör neve</th>
                     @can('sync permissions')
-                        <th></th>
-                        <th>Engedélyek</th>
+                        <th colspan="2">Engedélyek</th>
                     @else
                         <th>Engedélyek száma</th>
                     @endcan
                     @if (auth()->user()->can('delete users') ||
                             auth()->user()->can('update users'))
-                        <th>Műveletek</th>
+                        <th class="text-center">Műveletek</th>
                     @endif
                 </tr>
             </thead>
@@ -28,8 +27,8 @@
                 @foreach ($usersWithRoles as $user)
                     <tr>
                         <td class="text-center">{{ $user->id }}</td>
-                        <td class="ps-4"><b>{{ $user->name }}</b></td>
-                        <td class="ps-4">{{ $user->email }}</td>
+                        <td><b>{{ $user->name }}</b></td>
+                        <td>{{ $user->email }}</td>
                         <td>
                             @foreach ($user->roles as $role)
                                 <span class="badge bg-danger me-1">{{ $role->name }}</span>
