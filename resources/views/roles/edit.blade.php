@@ -10,7 +10,7 @@
                 {{-- <input type="hidden" name="role"> --}}
                 <input type="text" class="form-control mb-2" name="role_name" id="role_name" value="{{ $role->name }}"
                     required>
-                @can('delete users')
+                @can('delete roles')
                     <label>Engedélyek:</label><br>
                     <div class="form-control mb-2">
                         @foreach ($permissions as $permission)

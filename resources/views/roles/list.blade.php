@@ -29,7 +29,7 @@
                         <td class="text-center">
                             <span class="badge bg-danger">{{ $role->permissions->count() }}</span>
                         </td>
-                        @can('delete users')
+                        @can('delete roles')
                             <td>
                                 @foreach ($role->permissions as $permission)
                                     <span class="badge bg-danger me-1">{{ $permission->name }}</span>
@@ -39,7 +39,7 @@
                         <td>
                             <div class="d-flex justify-content-center">
                                 <a class="btn btn-sm btn-outline-success" href="{{ route('roles.edit', ['roleName' => $role->name]) }}">szerkeszt</a>
-                                @can('delete users')
+                                @can('delete roles')
                                     <form action="#" method="GET">
                                         @csrf
                                         <button class="btn btn-sm btn-outline-danger ms-1" type="submit">Törlés</button>

@@ -10,7 +10,7 @@
                 <label for="role_name">Szerepkőr neve:</label>
                 <input type="text" class="form-control mb-2" name="role_name" id="role_name" required>
 
-                @can('delete users')
+                @can('delete roles')
                     <label>Engedélyek:</label><br>
                     <div class="form-control mb-2">
                         @foreach ($permissions as $permission)
