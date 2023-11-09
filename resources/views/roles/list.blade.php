@@ -9,7 +9,7 @@
         <table class="table table-striped table-hover">
             <thead class="table-light">
                 <tr>
-                    <th>id</th>
+                    <th class="text-center">id</th>
                     <th style="width: 150px;">Szerepkör neve</th>
                     <th style="width: 150px;">Guard név </th>
                     @can('sync permissions')

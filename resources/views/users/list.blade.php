@@ -8,7 +8,7 @@
         <table class="table table-striped table-hover">
             <thead class="table-light">
                 <tr>
-                    <th>id</th>
+                    <th class="text-center">id</th>
                     <th style="width: 150px;">Felhasználó neve</th>
                     <th style="width: 250px;">Email cím</th>
                     <th style="width: 150px;">Szerepkör neve</th>
@@ -34,7 +34,7 @@
                                 <span class="badge bg-danger me-1">{{ $role->name }}</span>
                             @endforeach
                         </td>
-                        <td class="text-center">
+                        <td>
                             @php
                                 $totalPermissions = 0;
                             @endphp
